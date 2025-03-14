@@ -1,13 +1,13 @@
 'use client';
 
 import { logoutUser } from '@/actions/auth';
-import HeaderSearchBar from '@/components/layout/HeaderSearchBar';
-import { useCartStore } from '@/stores/cart-store';
+// import { useCartStore } from '@/stores/cart-store';
 import { User } from '@prisma/client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { useShallow } from 'zustand/shallow';
+// import { useShallow } from 'zustand/shallow';
+import HeaderSearchBar from './HeaderSearchBar';
 
 const AnnouncementBar = () => {
     return (
@@ -30,12 +30,12 @@ const Header = ({ user, categorySelector }: HeaderProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const [prevScrollY, setPrevScrollY] = useState<number>(0);
 
-    const { open, getTotalItems } = useCartStore(
-        useShallow((state) => ({
-            open: state.open,
-            getTotalItems: state.getTotalItems
-        }))
-    );
+    // const { open, getTotalItems } = useCartStore(
+    //     useShallow((state) => ({
+    //         open: state.open,
+    //         getTotalItems: state.getTotalItems
+    //     }))
+    // );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -118,7 +118,7 @@ const Header = ({ user, categorySelector }: HeaderProps) => {
                                     <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z' />
                                 </svg>
                                 <span className='absolute -top-1 -right-1 bg-black text-white text-[10px] sm:text-xs w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center'>
-                                    {getTotalItems()}
+                                    {/* {getTotalItems()} */} 0
                                 </span>
                             </button>
                         </div>
