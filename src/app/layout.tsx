@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { getCurrentSession } from '@/actions/auth';
+import { SanityLive } from "@/sanity/lib/live";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
           categorySelector={undefined}        
         />
         {children}
+        <SanityLive />
       </body>
     </html>
   );

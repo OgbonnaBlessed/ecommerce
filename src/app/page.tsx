@@ -1,9 +1,12 @@
+import { getAllProducts } from '@/sanity/lib/client'
 import React from 'react'
 
-const Home = () => {
+const Home = async () => {
+  const products = await getAllProducts()
+
   return (
     <div>
-      Home
+      {JSON.stringify(products)}
     </div>
   )
 }
