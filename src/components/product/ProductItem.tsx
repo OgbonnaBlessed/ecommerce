@@ -7,6 +7,7 @@ import React from 'react'
 type ProductItemProps = {
     product: Product;
 }
+
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <div className='bg-white rounded-lg overflow-hidden relative'>
@@ -39,6 +40,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                 <Link 
                     href={`/product/${product._id}`}
                     className='w-full text-center bg-gradient-to-r from-red-500 to-orange-500 text-white py-2 rounded-full text-sm font-bold hover:brightness-110 transition-all'
+                    prefetch
                 >
                     GRAB IT NOW!
                 </Link>

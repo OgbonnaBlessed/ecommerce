@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
-import { formatPrice } from '@/lib/utils';
+import { formatPrice } from '@/lib/utils'
 import { Product } from '@/sanity.types'
-// import { urlFor } from '@/sanity/lib/image';
-// import { useCartStore } from '@/stores/cart-store';
+import { urlFor } from '@/sanity/lib/image';
+import { useCartStore } from '@/stores/cart-store';
 import { Loader2 } from 'lucide-react'
 import React, { useState } from 'react'
-// import { useShallow } from 'zustand/shallow'
+import { useShallow } from 'zustand/shallow'
 
 type AddToCartButtonProps = {
     product: Product
 }
+
 const AddToCartButton = ({ product }: AddToCartButtonProps) => {
-    // const { cartId, addItem, open } = useCartStore(
-    //     useShallow((state) => ({
-    //         cartId: state.cartId,
-    //         addItem: state.addItem,
-    //         open: state.open,
-    //     }))
-    // )
+    const { cartId, addItem, open } = useCartStore(
+        useShallow((state) => ({
+            cartId: state.cartId,
+            addItem: state.addItem,
+            open: state.open,
+        }))
+    )
 
     const [isLoading, setLoading] = useState(false);
 
@@ -32,20 +32,20 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
         // Add the item to the cart
         await new Promise(resolve => setTimeout(resolve, 600));
 
-        // addItem({
-        //     id: product._id,
-        //     title: product.title,
-        //     price: product.price,
-        //     image: urlFor(product.image).url(),
-        //     quantity: 1,
-        // });
+        addItem({
+            id: product._id,
+            title: product.title,
+            price: product.price,
+            image: urlFor(product.image).url(),
+            quantity: 1,
+        });
 
         try {
             const anyWindow = window as any;
 
             if(anyWindow.umami) {
                 anyWindow.umami.track('add_to_cart', {
-                    // cartId: cartId,
+                    cartId: cartId,
                     productId: product._id,
                     productName: product.title,
                     price: product.price,
@@ -55,6 +55,7 @@ const AddToCartButton = ({ product }: AddToCartButtonProps) => {
         } catch(e) {
             console.log(e)
         }
+
         setLoading(false);
         open();
     }
