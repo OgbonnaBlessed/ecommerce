@@ -1,12 +1,11 @@
-import { getAllProducts } from '@/sanity/lib/client'
+import SalesCampaignBanner from '@/components/layout/SalesCampaignBanner'
 import React from 'react'
 
 const Home = async () => {
-  const products = await getAllProducts()
 
   return (
     <div>
-      {JSON.stringify(products)}
+      <SalesCampaignBanner />
     </div>
   )
 }
