@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-// import { createCheckoutSession } from '@/actions/stripe-actions';
+import { createCheckoutSession } from '@/actions/stripe-actions';
 import { formatPrice } from '@/lib/utils';
 import { useCartStore, type CartItem as CartItemType } from '@/stores/cart-store';
 import { Loader2, ShoppingCart, X } from 'lucide-react';
@@ -78,7 +78,18 @@ const CartItem = ({item}: {item: CartItemType}) => {
 }
 
 const Cart = () => {
-    const { cartId, items, close, isOpen, syncWithUser, setLoaded, getTotalPrice, getTotalItems } = useCartStore(
+    const { 
+            cartId, 
+            // removeItem, 
+            // updateQuantity, 
+            items, 
+            close, 
+            isOpen, 
+            syncWithUser, 
+            setLoaded, 
+            getTotalPrice, 
+            getTotalItems 
+        } = useCartStore(
         useShallow((state) => ({
             cartId: state.cartId,
             removeItem: state.removeItem,
@@ -110,7 +121,7 @@ const Cart = () => {
         }
         setLoadingProceed(true);
 
-        // const checkoutUrl = await createCheckoutSession(cartId);
+        const checkoutUrl = await createCheckoutSession(cartId);
 
         try {
             const anyWindow = window as any;
@@ -126,7 +137,7 @@ const Cart = () => {
             console.log(e);
         }
 
-        // window.location.href = checkoutUrl;
+        window.location.href = checkoutUrl;
         
         setLoadingProceed(false);
     }
@@ -142,7 +153,7 @@ const Cart = () => {
             {/* Backdrop */}
             {isOpen && (
                 <div
-                    className='fixed inset-0 bg-black/50 z-50 transition-opacity backdrop-blur-sm'
+                    className='fixed inset-0 bg-black/50 z-50 transition-opacity'
                     onClick={close}
                 />
             )}
@@ -190,7 +201,6 @@ const Cart = () => {
                                     href="/"
                                     onClick={close}
                                     className='bg-black text-white px-6 py-2 rounded-full font-medium hover:bg-gray-900 transition-colors'
-                                    prefetch
                                 >
                                     Start Shopping
                                 </Link>
