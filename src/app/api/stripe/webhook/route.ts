@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import prisma from "@/lib/prisma";
 import { umamiTrackCheckoutSuccessEvent } from "@/lib/umami";
 import { createClient } from "next-sanity";
@@ -96,7 +95,7 @@ export async function POST(req: Request) {
                         postalCode: session.shipping_details?.address?.postal_code,
                         country: session.shipping_details?.address?.country,
                     },
-                    orderItems: cart.items.map((item: { id: any; sanityProductId: any; quantity: any; price: any; }) => ({
+                    orderItems: cart.items.map((item) => ({
                         _type: 'orderItem',
                         _key: item.id,
                         product: {

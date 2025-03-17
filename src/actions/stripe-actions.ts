@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { getCurrentSession } from '@/actions/auth';
@@ -17,13 +16,13 @@ export const createCheckoutSession = async (cartId: string) => {
         throw new Error('Cart is empty');
     }
 
-    const totalPrice = cart.items.reduce((acc: number, item: { price: number; quantity: number; }) => acc + (item.price * item.quantity), 0);
+    const totalPrice = cart.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
-    console.log(cart.items.map((item: { title: any; }) => item.title))
+    console.log(cart.items.map((item) => item.title))
 
     const session = await stripe.checkout.sessions.create({
         mode: 'payment',
-        line_items: cart.items.map((item: { title: any; image: any; price: number; quantity: any; }) => ({
+        line_items: cart.items.map((item) => ({
             price_data: {
                 currency: 'usd',
                 product_data: {
