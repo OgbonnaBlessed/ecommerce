@@ -7,6 +7,8 @@ import { SanityLive } from "@/sanity/lib/live";
 import HeaderCategorySelector from "@/components/layout/HeaderCategorySelector";
 import Cart from "@/components/cart/Cart";
 import Script from "next/script";
+import { Suspense } from "react";
+import AnalyticsTracker from "@/components/layout/AnalyticsTracker";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -35,6 +37,12 @@ export default async function RootLayout({
           strategy='beforeInteractive'
         />
         {children}
+
+        <Suspense>
+          <AnalyticsTracker
+            user={user}
+          />
+        </Suspense>
 
         <Cart />
         
