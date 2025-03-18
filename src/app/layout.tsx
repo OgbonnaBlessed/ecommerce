@@ -31,7 +31,7 @@ export default async function RootLayout({
         />
         <Script
           src='https://cloud.umami.is/script.js'
-          data-website-id='(YOUR UMAMI WEBSITE ID)'
+          data-website-id='28b7a145-25d2-42c7-99d5-730e72c9a414'
           strategy='beforeInteractive'
         />
         {children}
