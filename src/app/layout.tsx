@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { getCurrentSession } from '@/actions/auth';
@@ -10,7 +10,15 @@ import Script from "next/script";
 import { Suspense } from "react";
 import AnalyticsTracker from "@/components/layout/AnalyticsTracker";
 
-const inter = Inter({ subsets: ["latin"] })
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +34,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header 
           user={user} 
           categorySelector={<HeaderCategorySelector />}        
